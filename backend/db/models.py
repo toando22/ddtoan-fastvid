@@ -45,3 +45,13 @@ class BulkAccessCode(Base):
     
     # BỔ SUNG CỘT NÀY CHO ĐỒNG BỘ
     deleted_at = Column(DateTime, nullable=True)
+    
+class AdminUser(Base):
+    __tablename__ = "admin_users"
+    id = Column(String(36), primary_key=True, default=generate_uuid)
+    username = Column(String(100), unique=True, nullable=False)
+    password_hash = Column(String(255), nullable=False)
+    role = Column(String(50), default="SUPER_ADMIN")
+    last_login = Column(DateTime, nullable=True)
+    created_at = Column(DateTime, default=datetime.utcnow)
+    deleted_at = Column(DateTime, nullable=True)    

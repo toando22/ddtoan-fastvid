@@ -12,10 +12,25 @@ const routes = [
     component: () => import('../views/BulkDownloadView.vue') 
   },
   // BỔ SUNG TRANG ADMIN VÀO ĐÂY
+// Thêm route giao diện đăng nhập Admin
+  { 
+    path: '/admin/login', 
+    name: 'AdminLogin',
+    component: () => import('../views/AdminLoginView.vue') 
+  },
+  // Route Admin được bảo vệ bởi Guard
   { 
     path: '/admin', 
     name: 'Admin',
-    component: () => import('../views/AdminDashboardView.vue') 
+    component: () => import('../views/AdminDashboardView.vue'),
+    beforeEnter: (to, from, next) => {
+      const isLoggedIn = localStorage.getItem('admin_logged') === 'true'
+      if (isLoggedIn) {
+        next() // Cho phép vào nếu đã đăng nhập
+      } else {
+        next('/admin/login') // Đá về trang đăng nhập nếu chưa có phiên
+      }
+    }  
   }
 ]
 
