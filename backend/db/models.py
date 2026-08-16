@@ -29,7 +29,7 @@ class AccessLog(Base):
     action_type = Column(String(50))
     reference_id = Column(String(36), nullable=True)
     status_code = Column(Integer, default=200)
-    created_at = Column(DateTime, default=datetime.utcnow)
+    created_at = Column(DateTime, default=datetime.now)
     required_clicks = Column(Integer, default=1)
 
 class BulkAccessCode(Base):
